@@ -34,7 +34,11 @@ def api_posts_detail(request, pk):
 
         if request.method == 'PUT' or request.method == 'PATCH':
             if request.user == post.author:
-                serializer = PostSerializer(post, data=request.data, partial=True)
+                serializer = PostSerializer(
+                    post,
+                    data=request.data,
+                    partial=True
+                )
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data)
@@ -93,7 +97,6 @@ def api_comments(request, post_pk):
 def api_comments_detail(request, post_pk, comment_pk):
     """Вью для отдельного коммента."""
     if request.user.is_authenticated:
-        post = get_object_or_404(Post, id=post_pk)
         comment = get_object_or_404(Comment, id=comment_pk)
 
         if request.method == 'GET':
@@ -102,7 +105,11 @@ def api_comments_detail(request, post_pk, comment_pk):
 
         if request.method == 'PUT' or request.method == 'PATCH':
             if request.user == comment.author:
-                serializer = CommentSerializer(comment, data=request.data, partial=True)
+                serializer = CommentSerializer(
+                    comment,
+                    data=request.data,
+                    partial=True
+                )
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data)
