@@ -6,9 +6,9 @@ from .views import PostViewSet, GroupViewSet, CommentViewSet
 router = SimpleRouter()
 router_comments = SimpleRouter()
 
-router.register('posts', PostViewSet)
-router.register('groups', GroupViewSet)
-router_comments.register('comments', CommentViewSet)
+router.register('posts', PostViewSet, basename='posts')
+router.register('groups', GroupViewSet, basename='groups')
+router_comments.register('comments', CommentViewSet, basename='comments')
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
